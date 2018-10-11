@@ -15,6 +15,17 @@ const saveTodos = function(todos) {
    localStorage.setItem('todos', JSON.stringify(todos));
 }
 
+// toggle todo completed value
+const toggleTodo = function(id) {
+   const todo = todos.find(function (todo) {
+      return todo.id === id
+   })
+
+   if (todo !== undefined) {
+      todo.completed = !todo.completed;
+   }
+}
+
 // remove a todo from the list
 const removeTodo = function(id) {
    const todoIndex = todos.findIndex(function(todo) {
@@ -61,9 +72,16 @@ const generateTodoDOM = function(todo) {
    const removeButton = document.createElement('button');
 
    // setup todo checkbox
-   checkbox.setAttribute('type', 'checkbox');
    //checkbox.type = 'checkbox'; -- also worked; is it correct?
+   checkbox.setAttribute('type', 'checkbox');
+   checkbox.checked = todo.completed;
    todoEl.appendChild(checkbox);
+   checkbox.addEventListener('change', function() {
+      toggleTodo(todo.id);
+      saveTodos(todos);
+      renderTodos(todos, filters);
+   })
+
 
    // setup todo text
    todoText.textContent = todo.text;

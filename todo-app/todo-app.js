@@ -15,10 +15,10 @@ document.querySelector('#search-text').addEventListener('input', function(event)
   renderTodos(todos, filters);
 })
 
+// listen for form submit
 document.querySelector('#todo-form').addEventListener('submit', function(event) {
   event.preventDefault();
   const todoText = event.target.elements.todoText.value;
-
 
   todos.push({
     id: uuidv4(),
@@ -39,6 +39,5 @@ document.querySelector('#todo-form').addEventListener('submit', function(event) 
 document.querySelector('#hide-completed').addEventListener('change', function(event) {
   filters.hideCompleted = event.target.checked;
   renderTodos(todos, filters);
-
 
 })

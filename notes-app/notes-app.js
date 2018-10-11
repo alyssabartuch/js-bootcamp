@@ -1,4 +1,7 @@
-const notes = getSavedNotes();
+let notes = getSavedNotes();
+
+// get id for not user is trying to edit
+const noteId = location.hash.substring(1);
 
 const filters = {
    searchText: ''
@@ -27,4 +30,11 @@ document.querySelector('#search-text').addEventListener('input', function(event)
 
 document.querySelector('#filter-by').addEventListener('change', function(event) {
    console.log(event.target.value);
+})
+
+window.addEventListener('storage', function(e) {
+   if (e.key === 'notes') {
+      notes = JSON.parse(e.newValue);
+      renderNotes(notes, filters);
+   }
 })

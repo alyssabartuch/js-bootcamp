@@ -24,11 +24,11 @@ const renderTodos = function(todos, filters) {
       return searchTextMatch && hideCompletedMatch;
    })
 
-   debugger
 
    const incompleteTodos = filteredTodos.filter(function(todo) {
       return !todo.completed;
    })
+
 
    document.querySelector('#todos').innerHTML = '';
 
@@ -44,9 +44,25 @@ const renderTodos = function(todos, filters) {
 
 // get the DOM elements for an individual todo
 const generateTodoDOM = function(todo) {
-   const todoElement = document.createElement('p')
-   todoElement.textContent = todo.text;
-   return todoElement;
+   const todoEl = document.createElement('div');
+   const checkbox = document.createElement('input');
+   const todoText = document.createElement('span');
+   const removeButton = document.createElement('button');
+
+   // setup todo checkbox
+   checkbox.setAttribute('type', 'checkbox');
+   //checkbox.type = 'checkbox'; -- also worked; is it correct?
+   todoEl.appendChild(checkbox);
+
+   // setup todo text
+   todoText.textContent = todo.text;
+   todoEl.appendChild(todoText);
+
+   // setup remove todo button
+   removeButton.textContent = 'x';
+   todoEl.appendChild(removeButton);
+
+   return todoEl;
 }
 
 // get the DOM elements for list summary

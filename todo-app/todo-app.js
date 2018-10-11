@@ -21,6 +21,7 @@ document.querySelector('#todo-form').addEventListener('submit', function(event) 
 
 
   todos.push({
+    id: uuidv4(),
     text: todoText,
     completed: false
   })

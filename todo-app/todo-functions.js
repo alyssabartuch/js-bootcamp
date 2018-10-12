@@ -72,7 +72,6 @@ const generateTodoDOM = function(todo) {
    const removeButton = document.createElement('button');
 
    // setup todo checkbox
-   //checkbox.type = 'checkbox'; -- also worked; is it correct?
    checkbox.setAttribute('type', 'checkbox');
    checkbox.checked = todo.completed;
    todoEl.appendChild(checkbox);

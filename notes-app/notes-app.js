@@ -12,11 +12,13 @@ renderNotes(notes, filters)
 
 document.querySelector('#create-note').addEventListener('click', function(event) {
    const id = uuidv4();
-   console.log(uuidv4);
+   const timestamp = moment().valueOf();
    notes.push({
       id: id,
       title: '',
-      body: ''
+      body: '',
+      createdAt: timestamp,
+      updatedAt: timestamp
    })
 
    saveNotes(notes);
@@ -38,3 +40,7 @@ window.addEventListener('storage', function(e) {
       renderNotes(notes, filters);
    }
 })
+
+
+
+// // UNIX epoch - Jan 1 1970 00:00:00

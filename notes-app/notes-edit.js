@@ -4,6 +4,7 @@ const noteId = location.hash.substring(1);
 const titleElement = document.querySelector('#note-title');
 const bodyElement = document.querySelector('#note-body');
 const removeElement = document.querySelector('#remove-note');
+const dateElement = document.querySelector('#last-edited');
 
 let notes = getSavedNotes();
 
@@ -19,15 +20,20 @@ if (note === undefined) {
 // populates fields with correct value
 titleElement.value = note.title;
 bodyElement.value = note.body;
+dateElement.textContent = generateLastEdited(note.updatedAt);
 
 // listens for changes on elemenet values
 titleElement.addEventListener('input', function(e) {
    note.title = e.target.value;
+   note.updatedAt = moment().valueOf();
+   dateElement.textContent = generateLastEdited(note.updatedAt);
    saveNotes(notes);
 });
 
 bodyElement.addEventListener('input', function(e) {
    note.body = e.target.value
+   note.updatedAt = moment().valueOf();
+   dateElement.textContent = generateLastEdited(note.updatedAt);
    saveNotes(notes);
 })
 
@@ -39,6 +45,7 @@ removeElement.addEventListener('click', function(e) {
 })
 
 window.addEventListener('storage', function(e) {
+   console.log('change');
    if (e.key === 'notes') {
       notes = JSON.parse(e.newValue);
 
@@ -55,6 +62,7 @@ window.addEventListener('storage', function(e) {
       // populates fields with correct value
       titleElement.value = note.title;
       bodyElement.value = note.body;
+      dateElement.textContent = generateLastEdited(note.updatedAt);
    }
 
 })

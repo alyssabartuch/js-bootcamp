@@ -4,7 +4,8 @@ let notes = getSavedNotes();
 const noteId = location.hash.substring(1);
 
 const filters = {
-   searchText: ''
+   searchText: '',
+   sortBy: 'byEdited'
 }
 
 // initial rendering of the list of notes
@@ -31,7 +32,8 @@ document.querySelector('#search-text').addEventListener('input', function(event)
 });
 
 document.querySelector('#filter-by').addEventListener('change', function(event) {
-   console.log(event.target.value);
+   filters.sortBy = event.target.value;
+   renderNotes(notes, filters);
 })
 
 window.addEventListener('storage', function(e) {

@@ -10,13 +10,13 @@ renderTodos(todos, filters);
 
 
 // listen for change on search text
-document.querySelector('#search-text').addEventListener('input', function(event) {
+document.querySelector('#search-text').addEventListener('input', (event) => {
   filters.searchText = event.target.value;
   renderTodos(todos, filters);
 })
 
 // listen for form submit
-document.querySelector('#todo-form').addEventListener('submit', function(event) {
+document.querySelector('#todo-form').addEventListener('submit', (event) => {
   event.preventDefault();
   const todoText = event.target.elements.todoText.value;
 
@@ -36,8 +36,7 @@ document.querySelector('#todo-form').addEventListener('submit', function(event) 
 
 
 // listen for change on checkbox (hide completed)
-document.querySelector('#hide-completed').addEventListener('change', function(event) {
+document.querySelector('#hide-completed').addEventListener('change', (event) => {
   filters.hideCompleted = event.target.checked;
   renderTodos(todos, filters);
-
 })

@@ -1,3 +1,5 @@
+'use strict'
+
 let notes = getSavedNotes();
 
 // get id for not user is trying to edit

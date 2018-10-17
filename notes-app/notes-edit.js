@@ -1,3 +1,5 @@
+'use strict'
+
 // get id for not user is trying to edit
 const noteId = location.hash.substring(1);
 

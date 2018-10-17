@@ -11,7 +11,7 @@ let notes = getSavedNotes();
 let note = notes.find((note) => note.id === noteId);
 
 // if note doesnt exist redirects back to home
-if (note === undefined) {
+if (!note) {
    location.assign('/index.html');
 }
 
@@ -48,10 +48,10 @@ window.addEventListener('storage', (e) => {
       notes = JSON.parse(e.newValue);
 
       // checks that note exists
-      let note = notes.find((note) => note.id === noteId);
+      note = notes.find((note) => note.id === noteId);
 
       // if note doesnt exist redirects back to home
-      if (note === undefined) {
+      if (!note) {
          location.assign('/index.html');
       }
 

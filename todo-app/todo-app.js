@@ -27,7 +27,6 @@ document.querySelector('#todo-form').addEventListener('submit', (event) => {
   })
 
   saveTodos(todos);
-  console.log(localStorage.getItem('text'));
 
   renderTodos(todos, filters);
 

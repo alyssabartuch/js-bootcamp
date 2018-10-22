@@ -1,39 +1,58 @@
-// prototypal iheritance
+// prototypal iheritance chain
+//    myPerson --> Person.prototype --> Object.prototype --> null
 
-const Person = function(fName, lName, age, likes = []) {
-   this.firstName = fName;
-   this.lastName = lName;
-   this.age = age;
-   this.likes = likes
+class Person {
+   constructor(firstName, lastName, age, likes = []) {
+      this.firstName = firstName;
+      this.lastName = lastName;
+      this.age = age;
+      this.likes = likes
+   }
+   getBio() {
+      let bio = `${this.firstName} is ${this.age}.`;
+
+      this.likes.forEach((like) =>{
+         bio += ` ${this.firstName} likes ${like}.`
+      })
+
+      return bio
+   }
+   setName(fullName) {
+      const names = fullName.split(' ');
+      this.firstName = names[0];
+      this.lastName = names[1];
+   }
 }
 
-Person.prototype.getBio = function() {
-   let bio = `${this.firstName} is ${this.age}`;
-
-   this.likes.forEach((like) =>{
-      bio += ` ${this.firstName} likes ${like}.`
-   })
-
-   return bio
+class Employee extends Person {
+   constructor(firstName, lastName, age, position, likes) {
+      super(firstName, lastName, age, likes);
+      this.position = position;
+   }
+   getBio() {
+      return `${this.firstName} ${this.lastName} is a ${this.position}.`
+   }
+   getYearsLeft() {
+      return 65 - this.age;
+   }
 }
 
-Person.prototype.setName = function(fullName) {
-   const names = fullName.split(' ');
-   this.firstName = names[0];
-   this.lastName = names[1];
+class Student extends Person {
+   constructor(firstName, lastName, age, grade, likes) {
+      super(firstName, lastName, age, likes)
+      this.grade = grade;
+   }
+   getBio() {
+      const status = this.grade >= 70 ? 'passing' : 'failing'
+      return `${this.firstName} is ${status} the class`
+   }
+   updateGrade(change) {
+      this.grade += change;
+   }
 }
 
-const me = new Person('alyssa', 'bartuch', 27, ['fiber arts', 'cats']);
-// me.firstName = 'Paige'
 
-me.getBio = function() {
-   return 'this is fake'
-}
-
-me.setName('linda kondrat')
+const me = new Student('alyssa', 'bartuch', 27, 50, ['cats', 'knitting']);
 console.log(me.getBio());
-
-
-
-const person2 = new Person('clancy', 'turner', 51);
-console.log(person2.getBio());
+me.updateGrade(25)
+console.log(me.getBio());

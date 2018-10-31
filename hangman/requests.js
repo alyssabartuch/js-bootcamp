@@ -1,58 +1,46 @@
-const getPuzzle = (wordCount, callback) => {
-
-   const request = new XMLHttpRequest();
-
-   request.addEventListener('readystatechange', (e) => {
-      if (e.target.readyState === 4 && e.target.status === 200) {
-         const data = JSON.parse(e.target.responseText);
-         callback(undefined, data.puzzle);
-      } else if (e.target.readyState === 4) {
-         callback('an error has taken place', undefined);
+const getPuzzle = (wordCount) => {
+   return fetch(`http://puzzle.mead.io/puzzle?wordCount=${wordCount}`).then((response) => {
+      if (response.status === 200) {
+         return response.json();
+      } else {
+         throw new Error('unable to fetch code');
       }
+   }).then((data) => {
+      return data.puzzle;
    })
-
-   request.open('GET', `http://puzzle.mead.io/puzzle?wordCount=${wordCount}`);
-   request.send();
-
 }
 
-// const getCountry = (countryCode, callback) => {
+
+
+const getCountry = (countryCode) => {
+   return fetch('https://restcountries.eu/rest/v2/all').then((response) => {
+      if (response.status === 200) {
+         return response.json()
+      } else {
+         throw new Error('an error has taken place')
+      }
+   }).then((data) => {
+      return data.find((country) => country.alpha2Code === countryCode);
+   })
+}
+
+
+
+// const getCountryOld = (countryCode) => new Promise((resolve, reject) => {
+//    const countriesReq = new XMLHttpRequest();
 //
-//    const countriesRequest = new XMLHttpRequest();
-//
-//    countriesRequest.addEventListener('readystatechange', (e) => {
+//    countriesReq.addEventListener('readystatechange', (e) => {
 //       if (e.target.readyState === 4 && e.target.status === 200) {
 //
 //          const countries = JSON.parse(e.target.response);
-//          console.log(countries);
-//          const country = countries.find((country) => countries.alpha2Code === country);
-//          callback(undefined, country);
+//          const country = countries.find((country) => country.alpha2Code === countryCode);
+//          resolve(country);
 //       } else if (e.target.readyState === 4) {
-//          callback('an error has taken place', undefined);
+//          reject('an error has taken place');
 //       }
+//
 //    })
 //
-//    countriesRequest.open('GET', 'https://restcountries.eu/rest/v2/all');
-//    countriesRequest.send();
-// }
-
-
-
-const getCountry = (countryCode, callback) => {
-   const countriesReq = new XMLHttpRequest();
-
-   countriesReq.addEventListener('readystatechange', (e) => {
-      if (e.target.readyState === 4 && e.target.status === 200) {
-
-         const countries = JSON.parse(e.target.response);
-         const country = countries.find((country) => country.alpha2Code === countryCode);
-         callback(undefined, country);
-      } else if (e.target.readyState === 4) {
-         callback('an error has taken place', undefined);
-      }
-
-   })
-
-   countriesReq.open('GET', 'https://restcountries.eu/rest/v2/all');
-   countriesReq.send();
-}
+//    countriesReq.open('GET', 'https://restcountries.eu/rest/v2/all');
+//    countriesReq.send();
+// })

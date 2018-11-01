@@ -20,19 +20,24 @@ document.querySelector('#search-text').addEventListener('input', (event) => {
 // listen for form submit
 document.querySelector('#todo-form').addEventListener('submit', (event) => {
   event.preventDefault();
-  const todoText = event.target.elements.todoText.value;
+  const text = event.target.elements.todoText.value.trim();
 
-  todos.push({
-    id: uuidv4(),
-    text: todoText,
-    completed: false
-  })
+  if (text) {
+     todos.push({
+      id: uuidv4(),
+      text,
+      completed: false
+     })
 
-  saveTodos(todos);
+     saveTodos(todos);
+     renderTodos(todos, filters);
+     event.target.elements.todoText.value = '';
 
-  renderTodos(todos, filters);
+  } else {
+     console.log('Please provide some text');
+  }
 
-  event.target.elements.todoText.value = '';
+
 })
 
 

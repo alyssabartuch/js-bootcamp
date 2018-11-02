@@ -1,5 +1,11 @@
 import Hangman from './hangman';
 import getPuzzle from './requests';
+import validator from 'validator';
+
+const email = 'alyssabartuchgmail.com';
+const isEmail = validator.isEmail(email);
+
+console.log(isEmail);
 
 
 const puzzleEl = document.querySelector('#puzzle');

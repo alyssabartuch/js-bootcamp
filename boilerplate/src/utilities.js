@@ -7,5 +7,6 @@ const name = 'Vinnie'
 const square = (x) => x * x
 // export default square
 
+console.log('from my code');
 
 export { add, name, square as default}

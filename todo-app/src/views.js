@@ -1,9 +1,7 @@
-import { getTodos, toggleTodo, removeTodo, saveTodos } from './todos';
+import { getTodos, toggleTodo, removeTodo } from './todos';
 import { getFilters } from './filters';
 
-// renderTodos
-// Arguments: none
-// Return value: none
+// render application todos based on filters
 const renderTodos = () => {
    const todos = getTodos();
    const filters = getFilters();
@@ -33,9 +31,7 @@ const renderTodos = () => {
    }
 }
 
-// generateTodoDOM
-// Arguments: todo
-// Return value: the todo element
+// get the DOM elements for an individual todo
 const generateTodoDOM = (todo) => {
    const todoEl = document.createElement('label');
    const containerEl = document.createElement('div');
@@ -50,7 +46,6 @@ const generateTodoDOM = (todo) => {
 
    checkbox.addEventListener('change', () => {
       toggleTodo(todo.id);
-      saveTodos(todos);
       renderTodos();
    })
 
@@ -70,16 +65,13 @@ const generateTodoDOM = (todo) => {
 
    removeButton.addEventListener('click', (e) => {
       removeTodo(todo.id);
-      saveTodos(todos);
       renderTodos();
    })
 
    return todoEl;
 }
 
-// generateSummaryDOM
-// Arguments: incompletedTodos
-// Return value: the summary element
+// get the DOM elements for list summary
 const generateSummaryDOM = (incomplete) => {
    const summary = document.createElement('h2');
    const plural = incomplete.length === 1 ? '' : 's';

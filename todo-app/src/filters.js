@@ -4,15 +4,7 @@ const filters = {
   hideCompleted: false
 };
 
-// getFilters
-// Arguments: none
-// Return value: filters object
-
 const getFilters = () => filters;
-
-// setFilters
-// Arguments: updates object with optional searchText or hideCompleted
-// Return value: none
 
 const setFilters = (updates) => {
     if (typeof updates.searchText === 'string') {

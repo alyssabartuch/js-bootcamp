@@ -1,46 +1,32 @@
 import uuidv4 from 'uuid/v4';
 
 // Setup the empty todos array
-const todos = [];
+let todos = [];
 
-// loadTodos
-// Arguments: none
-// Return value: none
+// fetch existing todos from local storage
 const loadTodos = () => {
    const todosJSON = localStorage.getItem('todos');
 
    try {
-      return todosJSON ? JSON.parse(todosJSON) : [];
+      todos = todosJSON ? JSON.parse(todosJSON) : [];
    } catch (e) {
       return [];
    }
 };
 
-// saveTodos
-// Arguments: none
-// Return value: none
-const saveTodos = (todos) => {
+// save todos to local storage
+const saveTodos = () => {
    localStorage.setItem('todos', JSON.stringify(todos));
 };
 
-// getTodos
-// Arguments: none
-// Return value: todos array
 const getTodos = () => todos;
 
-
-// createTodo
-// Arguments: todo text
-// Return value: none
-const createTodo = (todoText) => {
-   const todoId = uuidv4();
-
+const createTodo = (text) => {
    todos.push({
-      id: todoId,
-      text: todoText,
+      id: uuidv4(),
+      text,
       completed: false
    });
-
    saveTodos(todos);
 }
 
@@ -53,6 +39,7 @@ const removeTodo = (id) => {
    if (todoIndex > -1) {
       todos.splice(todoIndex, 1);
    }
+   saveTodos();
 }
 
 // toggleTodo
@@ -64,10 +51,11 @@ const toggleTodo = (id) => {
    if (todo) {
       todo.completed = !todo.completed;
    }
+   saveTodos();
 }
 
 
 // Make sure to call loadTodos and setup the exports
 loadTodos();
 
-export { loadTodos, saveTodos, getTodos, createTodo, removeTodo, toggleTodo };
+export { loadTodos, getTodos, createTodo, removeTodo, toggleTodo };

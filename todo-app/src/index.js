@@ -1,11 +1,5 @@
-// Set up index.html to load the bundle
-// Make sure to load uuid via an npm module when necessary
-
-// --
-
-// Add necessary imports
 import { setFilters } from './filters';
-import { createTodo } from './todos';
+import { createTodo, loadTodos } from './todos';
 import { renderTodos } from './views';
 
 // Render initial todos
@@ -38,8 +32,6 @@ document.querySelector('#todo-form').addEventListener('submit', (event) => {
       renderTodos();
       event.target.elements.todoText.value = '';
 
-   } else {
-      console.log('Please provide some text');
    }
 });
 
@@ -47,6 +39,7 @@ document.querySelector('#todo-form').addEventListener('submit', (event) => {
 
 window.addEventListener('storage', (e) => {
    if (e.key === 'todos') {
+      loadTodos();
       renderTodos();
    }
 });

@@ -4,8 +4,8 @@
 // --
 
 // Add necessary imports
-import { getFilters, setFilters } from './filters';
-import { loadTodos, saveTodos, getTodos, createTodo } from './todos';
+import { setFilters } from './filters';
+import { createTodo } from './todos';
 import { renderTodos } from './views';
 
 // Render initial todos
@@ -35,8 +35,6 @@ document.querySelector('#todo-form').addEventListener('submit', (event) => {
 
    if (text) {
       createTodo(text);
-
-      saveTodos(todos);
       renderTodos();
       event.target.elements.todoText.value = '';
 
@@ -46,3 +44,9 @@ document.querySelector('#todo-form').addEventListener('submit', (event) => {
 });
 
 // Bonus: Add a watcher for local storage
+
+window.addEventListener('storage', (e) => {
+   if (e.key === 'todos') {
+      renderTodos();
+   }
+});

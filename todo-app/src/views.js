@@ -1,4 +1,4 @@
-import { getTodos, toggleTodo, removeTodo } from './todos';
+import { getTodos, toggleTodo, removeTodo, saveTodos } from './todos';
 import { getFilters } from './filters';
 
 // renderTodos
@@ -47,7 +47,7 @@ const generateTodoDOM = (todo) => {
    checkbox.setAttribute('type', 'checkbox');
    checkbox.checked = todo.completed;
    containerEl.appendChild(checkbox);
-   
+
    checkbox.addEventListener('change', () => {
       toggleTodo(todo.id);
       saveTodos(todos);

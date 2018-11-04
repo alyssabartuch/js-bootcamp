@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html>
+   <head>
+      <title>To-do App</title>
+      <link href="/images/favicon.png" rel="icon">
+      <link href="/styles/styles.css" rel="stylesheet">
+   </head>
+   <body>
+
+      <div class="header">
+         <div class="container">
+            <h1 class="header__title">To-do App</h1>
+            <h2 class="header__subtitle">What do you need to do?</h2>
+         </div>
+      </div>
+
+      <div class="actions">
+         <div class="actions__container">
+            <input type="text" id="search-text" class="input" placeholder="filter by keyword" />
+            <label class="checkbox">
+               <input id="hide-completed" type="checkbox" /> Hide Completed
+            </label>
+         </div>
+      </div>
+
+      <div class="container">
+         <div id="todos"></div>
+
+         <form id="todo-form">
+            <input type="text" id="todo-text" class="input" placeholder="new todo item" name="todoText"/>
+            <button class="button">Submit</button>
+         </form>
+      </div>
+
+         <script src="/scripts/bundle.js"></script>
+      </body>
+</html>

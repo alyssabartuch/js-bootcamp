@@ -1,56 +1,25 @@
-const printTeam = (team, coach, ...players) => {
-   console.log(`Team: ${team}`);
-   console.log(`Coach: ${coach}`);
-   console.log(`Players: ${players.join(', ')}`);
+ const todo = {
+    id: 'fdagfhgfgda',
+    text: 'pay the bills',
+    completed: false
 }
 
-// printTeam('Liberty', 'Casey Penn', 'Marge', 'Aiden', 'Herbert', 'Sherry')
-
-const team = {
-   name: 'Liberty',
-   coach: 'Casey Penn',
-   players: ['Marge', 'Aiden', 'Herbert', 'Sherry']
+const printTodo = ({ text, completed }) => {
+   console.log(`${text}: ${completed}`);
 }
 
-// Spread Operator
-printTeam(team.name, team.coach, ...team.players);
+printTodo(todo);
 
+const { text: todoText, completed, details = 'no detils provided', ...others } = todo;
 
-let cities = ['barcelona', 'cape town', 'bordeaux'];
-cities = [...cities, 'santiago'];
+console.log(todoText);
+console.log(completed);
+console.log(details);
 
-// citiesCopy.push('santiago');
-console.log(cities);
+console.log(others);
 
-let house = {
-   bedrooms: 2,
-   bathrooms: 1.5,
-   yearBuilt: 2017
-}
+const age = [65, 0, 13];
+const [ firstAge, ...otherAges ] = age;
 
-let newHouse = {
-   basement: true,
-   ...house,
-   bedrooms: 3
-}
-
-console.log(house);
-console.log(newHouse);
-
-
-let person = {
-   name: 'alyssa',
-   age: 27
-}
-
-let location = {
-   city: 'hudsonville',
-   country: 'US'
-}
-
-let overview = {
-   ...person,
-   ...location
-}
-
-console.log(overview);
+console.log(firstAge);
+console.log(otherAges);
